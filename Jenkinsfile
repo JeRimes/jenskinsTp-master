@@ -3,6 +3,14 @@ pipeline {
   tools {
     maven 'Maven 3'
   }
+    post{
+
+       always{
+       emailext body: 'Ce Build $BUILD_NUMBER a ete éffectué',
+       recipientProviders:[requestor()], subject: 'build', to:'lav.jeremy22@gmail.com'
+
+        }
+    }
     stages {
         stage('git checkout') {
             steps {
